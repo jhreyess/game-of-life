@@ -1,8 +1,8 @@
+import math
 from Grid import Grid
-from Cell import SquareCell
 
 class Game:
-    def __init__(self, window):
+    def __init__(self, window, cell_type='hexa'):
         self.window = window
         self.running = True
         self.stop = True
@@ -15,8 +15,8 @@ class Game:
 
         self.rows = int(height/resolution)
         self.cols = int(width/resolution)
-
-        self.grid = self.make2DArray(resolution)
+        self.cell_type = cell_type
+        self.grid = self.make2DArray(resolution, self.cell_type)
 
     def update(self):
         self.grid.update()
@@ -25,7 +25,10 @@ class Game:
         self.grid.draw(self.window.screen)
     
     # Create a new array with random values
-    def make2DArray(self, resolution, cell_type=SquareCell):
+    def make2DArray(self, resolution, cell_type):
+        if(cell_type == 'hexa'):
+            offset = abs(resolution * math.cos(math.radians(30)) - resolution)
+            self.cols += math.ceil((offset * (self.cols)) / resolution)
         grid = Grid(self.rows, self.cols, resolution, cell_type)
         grid.randomize_state()
         return grid

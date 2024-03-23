@@ -6,9 +6,7 @@ pygame.init()
 clock = pygame.time.Clock()
 
 # Set up the game window
-screen_width = 1200
-screen_height = 800
-wm = WindowManager(screen_width, screen_height)
+wm = WindowManager(resolution=60)
 wm.set_caption("Game Of Life!")
 
 game = Game(wm)
@@ -52,7 +50,8 @@ while game.running:
                 game.grid.randomize_state()
                 game.stop = True
 
-    clock.tick(60)
+    if(not game.stop):
+        clock.tick(30)
     pygame.display.flip()
 
 pygame.quit()

@@ -1,4 +1,5 @@
 from random import random
+from Cell import Cell
 
 class Grid:
     def __init__(self, num_rows, num_cols, cell_size, cell_type):
@@ -64,7 +65,7 @@ class Grid:
             for col in range(self.cols):
                 x = col * self.cell_size
                 y = row * self.cell_size
-                cell = self.cell_type(0, x, y, self.cell_size)
+                cell = Cell(0, x, y, self.cell_size, self.cell_type)
                 row_cells.append(cell)
             cells.append(row_cells)
         return cells
